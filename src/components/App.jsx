@@ -6,11 +6,12 @@ export const App = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
+        fontSize: 68,
+        color: '#fff',
+        background: '#234579',
       }}
     >
-      React homework template
+      Homework No.5 Movies
     </div>
   );
 };
