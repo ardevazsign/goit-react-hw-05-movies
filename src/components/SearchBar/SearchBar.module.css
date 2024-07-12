@@ -1,0 +1,11 @@
+.inputHolder{
+  background-color: brown;
+}
+.input{
+  background-color: crimson;
+}
+.icon{
+  background-color: red;
+  width: 25px;
+  height: 25px;
+}

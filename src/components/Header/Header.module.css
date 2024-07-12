@@ -1,0 +1,26 @@
+.header {
+  background-color: aqua;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  
+   > nav {
+    display: flex;
+    padding: 20px;
+    margin-left: 120px;
+   }
+}
+
+.link {
+  font-size: 24px;
+  padding: 8px 16px;
+  color: black;
+  font-weight: 700;
+}
+
+.linkActive {
+  border: 1px solid whitesmoke;
+  composes: link;
+  color: azure;
+  background-color: orange;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
