@@ -4,6 +4,7 @@ import { fetchMovieByQuery } from '../../services/themoviedb-api';
 import { SearchBar } from 'components/SearchBar/SearchBar';
 import { MovieList } from 'components/MovieList/MovieList';
 import { Loader } from 'components/Loader/Loader';
+import css from './MoviePage.module.css'
 
 const MoviesPage = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -38,7 +39,7 @@ const MoviesPage = () => {
       {isLoading ? (
         <Loader />
       ) : movieName && searchResults.length === 0 ? (
-        <h2> Nothing found </h2>
+        <h2 className={css.notifationText}> The Title You Entered Not Found </h2>
       ) : (
         <MovieList movies={searchResults} />
       )}
