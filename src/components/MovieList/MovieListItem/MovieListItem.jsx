@@ -5,10 +5,9 @@ import css from './MovieListItem.module.css';
 export const MovieListItem = ({ id, title, posterPath, votes }) => {
   const BASE_URL = 'https://image.tmdb.org/t/p/w500';
   const location = useLocation();
-  const path = location.pathname === '/movies' ? `${id}` : `movies/${id}`;
+  const path = location.pathname === '/movies' ? `${id}` : `/movies/${id}`;
 
   return (
-
     <li className={css.movieListItem}>
       <Link
         className={css.link}
@@ -17,9 +16,9 @@ export const MovieListItem = ({ id, title, posterPath, votes }) => {
         state={{ from: `${location.pathname + location.search}` }}
       >
         <div className={css.fosterContainer}>
-        <img className={css.fosterImage} src={BASE_URL + posterPath} alt={`Poster ${title}`} />
+        <img className={css.fosterImage} src={BASE_URL + posterPath} alt={`${title}`} />
         <h4 className={css.movieTitle}>{title}</h4>
-          <span>{votes}</span>
+          <h5>{votes}</h5>
         </div>
       </Link>
     </li>
@@ -29,6 +28,6 @@ export const MovieListItem = ({ id, title, posterPath, votes }) => {
 MovieListItem.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  posterPath: PropTypes.string,
+  posterPath: PropTypes.string.isRequired,
   votes: PropTypes.number.isRequired,
 };

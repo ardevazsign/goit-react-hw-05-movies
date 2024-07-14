@@ -7,13 +7,13 @@ export const Header = () => {
       <nav className={css.nav}>
         <NavLink
           to="/"
-          end="true"
+          end
           className={({ isActive }) => (isActive ? css.linkActive : css.link)}
         >
           Home
         </NavLink>
         <NavLink 
-          to="/movies/:movieId"
+          to="/movies"
           className={({ isActive }) => (isActive ? css.linkActive : css.link)}
         >
           Movies

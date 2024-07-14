@@ -1,17 +1,17 @@
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, useRef, Suspense } from 'react';
 import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import { fetchMovieDetails } from '../../services/themoviedb-api';
-import { Button } from 'components/Button/Button';
 import { Loader } from 'components/Loader/Loader';
 import css from './MovieDetailsPage.module.css';
-// import { Link } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
+
 
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState();
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/';
+  const backLinkHref = useRef(location.state?.from || '/');
 
   useEffect(() => {
     (async () => {
@@ -25,47 +25,51 @@ const MovieDetailsPage = () => {
   }, [movieId]);
 
   if (!movieDetails) {
-    return <Loader />;
+    return  <Loader/>;
   }
 
   return (
     <>
-      <Link to={backLinkHref}>
-        <Button text="&larr; Go back" />
-      </Link>
+      <div className={css.backArrow}>
+      <Link to={backLinkHref.current} >
+        <FaArrowLeft />
+        </Link>
+      </div>
+
       <div className={css.movieDetailsContainer}>
         <img
           className={css.image}
-          src={
-            movieDetails.poster_path
-              ? `https://image.tmbd.org/t/p/w500${movieDetails.poster_path}`
-              : `https://fakeimg.pl/600x400?text=No+Image+Available`
-          }
+          src={ movieDetails.poster_path ? `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}` : `https://fakeimg.pl/450x500/13e5f0/000?text=No+Image&font=lobster`}
           alt={movieDetails.title}
         />
         <div className={css.movieDetailsWrap}>
-          <h1>{movieDetails.title}</h1>
-          <h4>User score: {Math.round(movieDetails.vote_average * 10)}%</h4>
-          <h2>Overview</h2>
-          <p>{movieDetails.overview}</p>
-          <h2>Genres</h2>
-          <p>
+          <h1 className={css.mainTitle}>{movieDetails.title}</h1>
+          <h4 className={css.userScore}>User score:   <span className={css.percent}>{Math.round(movieDetails.vote_average * 10)}%</span></h4>
+           <h2>Genres</h2>
+           <p className={css.genreDetails}>
             {movieDetails.genres.map(genre => (
-              <span key={genre.id}>{genre.name}</span>
+              <span key={genre.id}> {genre.name}</span>
             ))}
           </p>
+          <h2>Overview</h2>
+          <p className={css.contentOverview}>{movieDetails.overview}</p>
         </div>
       </div>
+
      
-      <hr />
-      <h3>Additional information</h3>
-      <Link to="cast">
-        <button text="Cast" />
+      
+      <h2 className={css.movieInfo}>Additional information</h2>
+      <div className={css.infoBtn}>
+      <Link to="cast" className={css.movieCast}>
+        Cast
       </Link>
-      <Link to="reviews">
-        <button text="Reviews" />
+
+      <Link to="reviews" className={css.movieReviews}>
+        Reviews
       </Link>
-      <hr />
+      </div>
+  
+
       <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>

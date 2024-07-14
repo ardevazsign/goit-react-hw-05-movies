@@ -14,7 +14,7 @@ const CastList = lazy(() => import('./CastList/CastList'));
 const ReviewList = lazy(() => import('./ReviewList/ReviewList'));
 
 
-export const App = () => {
+ const App = () => {
    return (
      <Routes>
        <Route path="/" element={<SharedLayout />}>
@@ -29,6 +29,6 @@ export const App = () => {
     </Routes>
    );
 };
+export default App;
 
-// export default App;
 

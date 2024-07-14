@@ -17,7 +17,7 @@ export const SearchBar = ({ onChange, value }) => {
        onChange={handleChange}
        placeholder="Search movies..."
        minLength={2}
-       debounceTimeout={500}
+       debounceTimeout={2000}
       />
       <HiSearch className={css.icon} />
     </div>

@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieReviews } from '../../services/themoviedb-api';
+import css from './ReviewList.module.css';
 
 
 
-export default function ReviewList({ movieId }) {
+ const ReviewList = () => {
+  const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
+ 
 
   useEffect(() => {
     fetchMovieReviews(movieId).then(setReviews);
@@ -17,19 +20,21 @@ export default function ReviewList({ movieId }) {
     <div>
       {reviews?.length > 0 ? (
         <ul>
-          {reviews.map(({ id, author, content }) => {
+          {reviews.map(({ id, author, created_at, content }) => {
             return (
-              <li key={id} className="item">
-                <p className="name">Author: {author}</p>
-                <p className="name">{content}</p>
+              <li key={id} className={css.itemHolder}>
+                <p className={css.authorName}>Author name: </p><h3 className={css.mainName}>{author}</h3>
+                <h4 className={css.createdDate}>{created_at.slice(0, 10)}</h4>
+                <p className={css.contentReviews}>{content}</p>
               </li> 
             );
           })}
         </ul>
       ) : (
-        <p>'We don't have any reviews for this movie.'</p>
+        <p className={css.warningReviews}>"We don't have any reviews for this movie."</p>
       )}
     </div>
   );
 };
 
+export default ReviewList;
